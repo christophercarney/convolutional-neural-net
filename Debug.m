@@ -3,30 +3,24 @@ function Debug()
     load('CNNparameters.mat', '-mat');
     load('cifar10testdata.mat', '-mat');
     
-    im = imread('airplane_test.jpg');
     %sample code to show image and access expected results
-    figure; imagesc(im); truesize(gcf,[64 64]);
-    out = ConvNeuralNet(im);
+    figure; imagesc(imrgb); truesize(gcf,[64 64]);
+    out = ConvNeuralNet(imrgb);
     for d = 1:length(layerResults)
-        %result = layerResults{d};
-        %fprintf('actual layer %d output is size %d x %d x %d\n',...
-        %d,size(result,1),size(result,2), size(result,3));
+        %stored debugging result
+        result = layerResults{d};
+        fprintf('actual layer %d output is size %d x %d x %d\n',...
+        d,size(result,1),size(result,2), size(result,3));
     
+        %result of our CNN 
         result2 = out{d};
         fprintf('computed layer %d output is size %d x %d x %d\n',...
         d,size(result2,1),size(result2,2), size(result2,3));
     
-        %diff = setdiff(result, result2);
-        %if(length(diff) ~= 0)
-        %    fprintf('computed layer %d differs from actual\n', d);
-        %end
+        %stop with debugger here as needed and check out
+        %   results and differences between steps
+        disp(setdiff(result, result2));
     end
-    %find most probable class
-    %classprobvec = squeeze(layerResults{end});
-    %[maxprob,maxclass] = max(classprobvec);
-    %note, classlabels is defined in ?cifar10testdata.mat?
-    %fprintf('actual class is %s with probability %.4f\n',...
-    %classlabels{maxclass},maxprob);
 
     %find most probable class
     classprobvec = squeeze(out{end});
@@ -34,5 +28,6 @@ function Debug()
     %note, classlabels is defined in ?cifar10testdata.mat?
     fprintf('computed class is %s with probability %.4f\n',...
     classlabels{maxclass},maxprob);
+    %acutal is airplane, CNN computes airplane
 
 end

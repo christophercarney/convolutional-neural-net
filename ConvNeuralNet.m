@@ -1,6 +1,5 @@
 function out = ConvNeuralNet(input_im)
     load('CNNparameters.mat', '-mat');
-    load('cifar10testdata.mat', '-mat');
     
     out = cell(1, 18);
     im = double(input_im);
@@ -23,18 +22,4 @@ function out = ConvNeuralNet(input_im)
     out{1,16} = Maxpool(out{1,15});
     out{1,17} = fullyConnected(out{1,16}, biasvectors{17}, filterbanks{17});
     out{1,18} = softmax(out{1,17});
-
-    %figure; imagesc(orig); truesize(gcf,[64 64]);
-    %sprintf('Found:%s',classlabels{IndexOfMax(final)}); 
-    %disp(classlabels{IndexOfMax(out{1,18})});
-    %disp(out{1,18});
-end
-
-function out = IndexOfMax(probabilities)
-    m = max(probabilities);
-    for i = 1:length(probabilities)
-        if (probabilities(i) == m)
-            out = i;
-        end
-    end
 end
