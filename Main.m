@@ -11,7 +11,7 @@ function Main()
         %get indices of all images of that class
         inds = find(trueclass==classindex);
         %take first one
-        for imNum = 1:10000
+        for imNum = 1:1000
             imrgb = imageset(:,:,:,inds(imNum));    %load each img into
             out = ConvNeuralNet(imrgb);             %  CNN
 
