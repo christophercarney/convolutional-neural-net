@@ -9,9 +9,10 @@ function CustomTest()
         % Do some stuff
         out = ConvNeuralNet(im);
         
-        if(strcmp(file.name,'face_1.jpg'))
-            MakeGraphsFromOutputSet(out);
-        end
+        %uncomment to make graphs and images for a custom input
+        %if(strcmp(file.name,'face_1.jpg'))
+        %    MakeGraphsFromOutputSet(out);
+        %end
         
         classprobvec = squeeze(out{end});
         [maxprob,maxclass] = max(classprobvec);
