@@ -4,7 +4,7 @@ function Debug()
     load('cifar10testdata.mat', '-mat');
     
     %sample code to show image and access expected results
-    figure; imagesc(imrgb); truesize(gcf,[64 64]);
+    %figure; imagesc(imrgb); truesize(gcf,[64 64]);
     out = ConvNeuralNet(imrgb);
     for d = 1:length(layerResults)
         %stored debugging result
@@ -28,6 +28,7 @@ function Debug()
     %note, classlabels is defined in ?cifar10testdata.mat?
     fprintf('computed class is %s with probability %.4f\n',...
     classlabels{maxclass},maxprob);
-    %acutal is airplane, CNN computes airplane
-
+    %acutal is airplane, CNN computes airplane 
+    
+    MakeGraphsFromOutputSet(out);
 end

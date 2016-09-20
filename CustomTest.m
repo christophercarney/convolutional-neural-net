@@ -9,6 +9,10 @@ function CustomTest()
         % Do some stuff
         out = ConvNeuralNet(im);
         
+        if(strcmp(file.name,'face_1.jpg'))
+            MakeGraphsFromOutputSet(out);
+        end
+        
         classprobvec = squeeze(out{end});
         [maxprob,maxclass] = max(classprobvec);
         fprintf('computed class is %s (actual %s) with probability %.4f\n',...
