@@ -3,13 +3,12 @@ function CustomTest()
     load('CNNparameters.mat', '-mat');
 
     %reading the files we got from the internet in and classifying them
-    files = dir('custom_test/*.jpg');
+    files = dir('custom_test/objects_organisms/*.jpg');
     for file = files'
-        im = imread(strcat('custom_test/',file.name));
+        im = imread(strcat('custom_test/objects_organisms/',file.name));
         % Do some stuff
         out = ConvNeuralNet(im);
         
-        %uncomment to make graphs and images for a custom input
         %if(strcmp(file.name,'face_1.jpg'))
         %    MakeGraphsFromOutputSet(out);
         %end
