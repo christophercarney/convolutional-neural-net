@@ -3,6 +3,7 @@ function Main()
     load('cifar10testdata.mat', '-mat');
 
     confusionMatrix = zeros(10, 10);
+    classifyPlot = zeros(1, 10);
 
     fprintf('classifying 10,000 cifar10testdata images...\n');
     
@@ -20,10 +21,24 @@ function Main()
 
             %placing what the img was computed as in the matrix
             confusionMatrix(classindex, maxclass) = confusionMatrix(classindex, maxclass) + 1;
+            pos = GetCorrectClassPosition(classindex, classprobvec);
+            classifyPlot = PlotClassification(classifyPlot, pos);
             
         end
         fprintf('%d percent done...\n', classindex * 10);
     end
 
     disp(confusionMatrix);
+    disp(classifyPlot);
+end
+
+function out = GetCorrectClassPosition(classindex, classprobvec)
+    out = 1;
+
+    [maxprob,maxclass] = max(classprobvec);
+    while maxclass ~= classindex
+        classprobvec(maxclass) = 0;
+        out = out + 1;
+        [maxprob,maxclass] = max(classprobvec);
+    end
 end
